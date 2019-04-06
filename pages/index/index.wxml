@@ -1,0 +1,57 @@
+<!--index.wxml-->
+<view>
+<view class="mpage {{!ui.tStart ? 'withAnimate': ''}}" style="left:{{ui.offsetLeft}}px;width:{{windowWidth}}px; height:{{windowHeight}}px; flex-direction: column; " bindtap = "handletap" bindtouchstart = "handletouchtart" catchtouchmove="handletouchmove" bindtouchend="handletouchend">
+  <view class='navbar' >
+    <!-- <image catchtap='userSlideShowTap' style="height:35px; width:35px; padding:5px;" src="../../images/user.png"></image> -->
+    <view wx:for="{{navitopbar}}" data-idx="{{index}}" wx:key="unique" catchtap="navtopbarTap" class="navitop-item {{currentTab==index ? 'active' : ''}}">{{item}}</view>
+  </view>
+
+  <!--地理位置页面-->
+  <view class='navbarpage' hidden="{{currentTab !== 0}}">
+    <!-- tab_01 -->
+    <!--地图容器-->
+    <map id="myMap"
+      markers="{{markers}}"
+      style="width:100%; height:{{systemHeight}}px;"
+      longitude="116.313972"
+      latitude="39.980014" scale='16'>
+    </map>
+  </view>
+
+  <!--调试与控制页面-->
+  <view class='navbarpage' hidden="{{currentTab !== 1}}">
+    <!-- tab_02 -->
+    <view class='navbar'>
+      <view wx:for="{{navitopBarControl}}" data-idx="{{index}}" wx:key="unique" bindtap="navtopBarControlTap" class="navitop-itemControl {{currentTabControl==index ? 'active' : ''}}">{{item}}</view>
+    </view>
+  </view>
+
+  <!--操作日志页面-->
+  <view class='navbarpage' hidden="{{currentTab !== 2}}">
+    <!-- tab_03 -->
+    
+  </view>
+  
+</view>
+
+  <!-- 侧滑栏 -->
+  <!-- 侧边栏显示 start -->
+  <view wx:if="{{ui.offsetLeft > 0}}" style="slide" style="width:{{ui.menuWidth}}px;height:{{windowHeight}}px;" bindtap = "handletap" bindtouchstart = "handletouchtart" catchtouchmove="handletouchmove" bindtouchend="handletouchend">
+    <view>
+      <!-- 侧边栏具体内容 -->
+      <view class='user-face-wrapper' style='height: {{windowHeight*0.2}}px'>
+        <image mode="aspectFill" src="../../images/backGround.png" style="height: {{windowHeight*0.2}}px" class="loginbg"></image>
+        <image class="user-face" catchtap='loginInTap' src="{{itemAvatar}}"></image>
+        <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+          获取用户信息
+        </button> -->
+      </view>
+      <view wx:for="{{itemSlide}}" wx:key="{{index}}">
+        <view class="itemself" catchtap='bindTapSlideItem' data-index='{{index}}'>
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 侧边栏显示 end -->
+</view>
