@@ -1,2 +1,53 @@
 <!--pages/slide/projectbrief/projectbrief.wxml-->
-<text>pages/slide/projectbrief/projectbrief.wxml</text>
+<scroll-view scroll-y='true' class='service'>
+  <view class="box">
+    <view class="tit">水下机器人监控系统 V1.0</view>
+    <view class="tit_s">
+      一.前言
+    </view>
+    <view class="cont">
+      <p>本文档是杭州电子科技大学电子信息学院 Sinn 开展的毕业设计项目《基于微信小程序的水下机器人监控软件的设计实现》使用说明</p>
+    </view>
+
+    <view class="tit_s">
+      二.软件概述
+    </view>
+    <view class="cont">
+      <p>自水下机器人研究开展以来，有关水下机器人的岸基监控软件研究一直停留在PC端通信与控制领域，当前国内外对于水下机器人研究主要集中在PC端上位机控制，较多采用LabVIEW和FTLK类库开发，基于移动端（Android和iOS平台）设计的水下机器人监控软件较少，而微信小程序作为新兴平台，相应的监控软件设计更是凤毛麟角。随着移动互联网和智能手机的普及，使AUV与智能手机相结合，是本课题的设计方向。</p>
+    </view>
+
+    <view class="cont">
+      <p>基于微信小程序，用户可以通过监控软件随时随地方便地实现人机交互、水下机器人控制、查看机器人当前状态以及以地图地形式显示当前水下机器人的位置。同时增加管理员认证，能够限制水下机器人控制权限在工作人员手中，且不影响普通用户对于当前水下机器人的运行状态和获取水下环境的相关信息。</p>
+    </view>
+  </view>
+
+    <!-- <view class="tit_s">
+      三. 开源协议(基于MIT)
+    </view>
+    <view class="cont">
+      <p>MIT License</p>
+    </view>
+    <view class="cont">
+      <p>Copyright (c) 2017 Dmego</p>
+    </view>
+    <view class="cont">
+      <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+        modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+    </view>
+    <view class="cont">
+      <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+    </view>
+    <view class="cont">
+      <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+        HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+      </p>
+    </view> -->
+
+    <!-- <view class="tit_s">
+      四.项目地址
+    </view>
+    <view class="cont">
+      <p>GitHub: https://github.com/dmego/together</p>
+    </view> -->
+  <!-- </view> -->
+</scroll-view>

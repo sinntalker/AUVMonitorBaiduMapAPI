@@ -1,1 +1,42 @@
 /* pages/slide/userinfo/userinfo.wxss */
+.user-row {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-row-text {
+  padding: 3px;
+  font-size: 18px;
+  flex: 1;
+}
+
+.user-row-username {
+  margin-right: 20px;
+  font-size: 14px;
+  padding: 5px;
+  border: 1px #dbdbdb solid;
+  border-radius: 5px;
+}
+
+.user-row-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  border: 1px #dbdbdb solid;
+  border-radius: 50%;
+}
+
+.user-button {
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  border: 1px #118fff solid;
+  background: #fff;
+  color: #118fff;
+}

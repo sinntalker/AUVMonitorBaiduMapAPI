@@ -1,2 +1,12 @@
 <!--pages/slide/userinfo/userinfo.wxml-->
-<text>pages/slide/userinfo/userinfo.wxml</text>
+<view>
+  <view class='user-row'>
+    <text class='user-row-text'>昵称</text>
+    <text class='user-row-username' bindtap='submitUserNameChangeTap'>{{username}}</text>
+    </view>
+  <view class='user-row'>
+    <text class='user-row-text'>头像</text>
+    <image class='user-row-image' bindtap='submitUserAvatarChangeTap' src='{{userAvatar}}' mode='scaleToFill'></image>
+  </view>
+  <button class='user-button' bindtap='submitUserInfoChangeTap'>保存更改</button>
+</view>

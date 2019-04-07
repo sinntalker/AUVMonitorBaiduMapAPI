@@ -17,13 +17,16 @@ App({
     //获取系统信息
     try {
       const res = wx.getSystemInfoSync()
-      this.globalData.systemInfo.model = res.model
-      this.globalData.systemInfo.pixelRatio = res.pixelRatio
-      this.globalData.systemInfo.windowWidth = res.windowWidth
-      this.globalData.systemInfo.windowHeight = res.windowHeight
-      this.globalData.systemInfo.language = res.language
-      this.globalData.systemInfo.version = res.version
-      this.globalData.systemInfo.platform = res.platform
+      // this.globalData.systemInfo.model = res.model
+      // this.globalData.systemInfo.pixelRatio = res.pixelRatio
+      // this.globalData.systemInfo.windowWidth = res.windowWidth
+      // this.globalData.systemInfo.windowHeight = res.windowHeight
+      // this.globalData.systemInfo.language = res.language
+      // this.globalData.systemInfo.version = res.version
+      // this.globalData.systemInfo.platform = res.platform
+
+      wx.setStorageSync('windowWidth', res.windowWidth)
+      wx.setStorageSync('windowHeight', res.windowHeight)
       console.log("APP - 获取设备信息成功！")
     } catch (e) {
       // Do something when catch error

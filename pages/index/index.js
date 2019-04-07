@@ -29,6 +29,16 @@ Page({
     navitopbar: ["地理位置", "调试与控制", "操作日志"],
     currentTab: 0, //标签控制： 0 - 地理位置， 1 - 调试与控制， 2 - 操作日志
 
+    //地图上marker点
+    markers: [{
+      iconPath: '../../images/auv.png',
+      id: 0,
+      latitude: 23.099994,
+      longitude: 113.324520,
+      width: 50,
+      height: 50
+    }],
+
     // index 系统信息
     windowHeight: 0,
     windowWidth: 0,
@@ -80,6 +90,11 @@ Page({
     this.setData({
       currentTab: e.currentTarget.dataset.idx // 标签切换
     })
+  },
+
+  //地图 - 标记点
+  markertap(e) {
+    console.log(e.markerId)
   },
 
   // 顶部导航栏 - 调试与控制 切换
@@ -141,6 +156,12 @@ Page({
     var that = this;
     try {
       console.log("index - onload - getSystemInfo success.")
+      var height = wx.getStorageSync('windowHeight')
+      var width = wx.getStorageSync('windowWidth')
+      this.setData({
+        windowHeight: height,
+        windowWidth: width,
+      })
       let res = wx.getSystemInfo({
         success: function (res) {
           that.data.ui.menuWidth = res.windowWidth * 0.5;
@@ -148,8 +169,8 @@ Page({
           that.data.ui.tStart = true;
           that.setData({
             ui: that.data.ui,
-            windowHeight: res.windowHeight,
-            windowWidth: res.windowWidth,
+            // windowHeight: res.windowHeight,
+            // windowWidth: res.windowWidth,
           })
           console.log("systemInfo:" + res.windowHeight + " " + res.windowWidth + res.model + " " + res.pixelRatio + " " + res.language + " " + res.version + " " + res.platform)
           console.log("slide ui info:" + that.data.ui.menuWidth + " " + that.data.ui.offsetLeft + " " + that.data.ui.tStart)
@@ -168,6 +189,8 @@ Page({
     this.setData({
       itemAvatar: (this.data.userAvatarUrl != '') ? (this.data.userAvatarUrl) : ('../../images/user.png'),
     })
+
+
   },
 
   /**
@@ -180,23 +203,30 @@ Page({
       this.setData({
         isLogin: true,
       })
-      this.setData({
-        itemAvatar: this.data.isLogin ? (this.data.userAvatarUrl) : ('../../images/user.png'),
-      })
 
     } else {
       console.log("用户已经进行微信登陆")
       this.setData({
         isLogin: false,
       })
-      this.setData({
-        itemAvatar: this.data.isLogin ? (this.data.userAvatarUrl) : ('../../images/user.png'),
-      })
     }
   },
 
   handletap: function(e) {
     console.log("index - 点击了handletap")
+  },
+
+  userSlideShowTap: function(e) {
+    // console.log("index - userSlideShowTap");
+    let { ui } = this.data;
+    if (ui.offsetLeft <= 0) {
+      ui.offsetLeft = ui.menuWidth;
+    } else if (ui.offsetLeft >= ui.menuWidth) {
+      ui.offsetLeft = 0;
+    }
+    this.setData({
+      ui: ui,
+    })
   },
 
   // -------------------------------------------------------
@@ -209,32 +239,32 @@ Page({
     if (id == 0) {
       console.log("index: " + id);
       wx.navigateTo({
-        url: './slide/userinfo/userinfo', 
+        url: '../slide/userinfo/userinfo', 
       })
     } else if (id == 1) {
       console.log("index: " + id);
       wx.navigateTo({
-        url: './slide/deviceinfo/deviceinfo',
+        url: '../slide/deviceinfo/deviceinfo',
       })
     } else if (id == 2) {
       console.log("index: " + id);
       wx.navigateTo({
-        url: './slide/projectbrief/projectbrief',
+        url: '../slide/projectbrief/projectbrief',
       })
     } else if (id == 3) {
       console.log("index: " + id);
       wx.navigateTo({
-        url: './slide/feedback/feedback',
+        url: '../slide/feedback/feedback',
       })
     } else if (id == 4) {
       console.log("index: " + id);
       wx.navigateTo({
-        url: './slide/aboutus/aboutus',
+        url: '../slide/aboutus/aboutus',
       })
     } else if (id == 5) {
       console.log("index: " + id);
       wx.navigateTo({
-        url: './slide/aclsetting/aclsetting',
+        url: '../slide/aclsetting/aclsetting',
       })
     }
     //  else if (id == 6) {

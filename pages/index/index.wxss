@@ -5,6 +5,9 @@
   flex: none;
   display: flex;
   background: #FFF;
+  align-items: center;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #dbdbdb;
 }
 .navitop-item{
   text-align: center;
@@ -32,6 +35,13 @@
   flex-direction: column;
   display: flex;
   background: #fff;
+}
+.user-row-image {
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  border: 1px #dbdbdb solid;
+  border-radius: 50%;
 }
 /* 侧边栏 */
 /* 主页显示 */

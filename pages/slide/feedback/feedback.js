@@ -5,14 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
+    list_remind: '加载中',
+    status: false,  //是否显示列表
+    itemopen: false,
+    feednum: 0, //反馈的次数
+    hasFeed: false,
+    title: '',
+    content: '',
+    info: '',
+    showTopTips: false,
+    TopTips: '',
 
+    windowHeight: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.data.windowHeight = wx.getStorageSync('windowHeight')
+    console.log("feedback windowHeight:" + this.data.windowHeight)
   },
 
   /**

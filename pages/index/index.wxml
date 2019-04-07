@@ -1,8 +1,9 @@
 <!--index.wxml-->
 <view>
-<view class="mpage {{!ui.tStart ? 'withAnimate': ''}}" style="left:{{ui.offsetLeft}}px;width:{{windowWidth}}px; height:{{windowHeight}}px; flex-direction: column; " bindtap = "handletap" bindtouchstart = "handletouchtart" catchtouchmove="handletouchmove" bindtouchend="handletouchend">
+<!-- <view class="mpage {{!ui.tStart ? 'withAnimate': ''}}" style="left:{{ui.offsetLeft}}px;width:{{windowWidth}}px; height:{{windowHeight}}px; flex-direction: column; " bindtap = "handletap" bindtouchstart = "handletouchtart" catchtouchmove="handletouchmove" bindtouchend="handletouchend"> -->
+<view class="mpage {{!ui.tStart ? 'withAnimate': ''}}" style="left:{{ui.offsetLeft}}px;width:{{windowWidth}}px; height:{{windowHeight}}px; flex-direction: column;">
   <view class='navbar' >
-    <!-- <image catchtap='userSlideShowTap' style="height:35px; width:35px; padding:5px;" src="../../images/user.png"></image> -->
+    <image class='user-row-image' catchtap='userSlideShowTap' src="{{itemAvatar}}"></image>
     <view wx:for="{{navitopbar}}" data-idx="{{index}}" wx:key="unique" catchtap="navtopbarTap" class="navitop-item {{currentTab==index ? 'active' : ''}}">{{item}}</view>
   </view>
 
@@ -12,9 +13,10 @@
     <!--地图容器-->
     <map id="myMap"
       markers="{{markers}}"
-      style="width:100%; height:{{systemHeight}}px;"
-      longitude="116.313972"
-      latitude="39.980014" scale='16'>
+      bindmarkertap="markertap"
+      style="width:100%; height:{{windowHeight}}px;"
+      longitude="113.324520"
+      latitude="23.099994" scale='16'>
     </map>
   </view>
 
@@ -36,7 +38,8 @@
 
   <!-- 侧滑栏 -->
   <!-- 侧边栏显示 start -->
-  <view wx:if="{{ui.offsetLeft > 0}}" style="slide" style="width:{{ui.menuWidth}}px;height:{{windowHeight}}px;" bindtap = "handletap" bindtouchstart = "handletouchtart" catchtouchmove="handletouchmove" bindtouchend="handletouchend">
+  <!-- <view wx:if="{{ui.offsetLeft > 0}}" style="slide" style="width:{{ui.menuWidth}}px;height:{{windowHeight}}px;" bindtap = "handletap" bindtouchstart = "handletouchtart" catchtouchmove="handletouchmove" bindtouchend="handletouchend"> -->
+  <view wx:if="{{ui.offsetLeft > 0}}" style="slide" style="width:{{ui.menuWidth}}px;height:{{windowHeight}}px;">
     <view>
       <!-- 侧边栏具体内容 -->
       <view class='user-face-wrapper' style='height: {{windowHeight*0.2}}px'>

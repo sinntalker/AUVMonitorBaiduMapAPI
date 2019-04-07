@@ -1,2 +1,13 @@
 <!--pages/slide/aboutus/aboutus.wxml-->
-<text>pages/slide/aboutus/aboutus.wxml</text>
+<text class="desc">
+	《水下机器人监控软件》 - 毕业设计
+   它基于 LeanCloud 作为后端云服务
+   由SinnLiu开发并维护
+</text>
+
+<image src="../../../images/bg1.jpg" mode="widthFix" />
+
+<view class="copyright">
+  <text>杭州电子科技大学 电子信息学院</text>
+  <view><text>Copyright @ {{year}} All Rights Reserved</text></view>
+</view>
