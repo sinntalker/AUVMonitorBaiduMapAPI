@@ -11,7 +11,9 @@
       <!-- tab_01 -->
       <!--地图容器-->
       <view class='mapset'>
-        <map id="myMap"
+        
+
+        <!-- <map id="myMap"
           markers="{{markers}}"
           bindmarkertap="markertap"
           style="width:100%; min-height:{{windowHeight*0.8}}px;display:flex; flex-direction: column; flex:1;"
@@ -54,7 +56,7 @@
             </cover-view>
           </cover-view>
         </cover-view>
-      </map>
+      </map> -->
     </view>
   </view>
 
