@@ -1,42 +1,71 @@
 <!--index.wxml-->
 <view>
-<!-- <view class="mpage {{!ui.tStart ? 'withAnimate': ''}}" style="left:{{ui.offsetLeft}}px;width:{{windowWidth}}px; height:{{windowHeight}}px; flex-direction: column; " bindtap = "handletap" bindtouchstart = "handletouchtart" catchtouchmove="handletouchmove" bindtouchend="handletouchend"> -->
-<view class="mpage {{!ui.tStart ? 'withAnimate': ''}}" style="left:{{ui.offsetLeft}}px;width:{{windowWidth}}px; height:{{windowHeight}}px; flex-direction: column;">
-  <view class='navbar' >
-    <image class='user-row-image' catchtap='userSlideShowTap' src="{{itemAvatar}}"></image>
-    <view wx:for="{{navitopbar}}" data-idx="{{index}}" wx:key="unique" catchtap="navtopbarTap" class="navitop-item {{currentTab==index ? 'active' : ''}}">{{item}}</view>
-  </view>
+  <view class="mpage {{!ui.tStart ? 'withAnimate': ''}}" style="left:{{ui.offsetLeft}}px;width:{{windowWidth}}px; height:{{windowHeight}}px; flex-direction: column;" bindtap='userSlideCloseTap'>
+    <view class='navbar' >
+      <image class='user-row-image' catchtap='userSlideShowTap' src="{{itemAvatar}}"></image>
+      <view wx:for="{{navitopbar}}" data-idx="{{index}}" wx:key="unique" catchtap="navtopbarTap" class="navitop-item {{currentTab==index ? 'active' : ''}}">{{item}}</view>
+    </view>
 
-  <!--地理位置页面-->
-  <view class='navbarpage' hidden="{{currentTab !== 0}}">
-    <!-- tab_01 -->
-    <!--地图容器-->
-    <map id="myMap"
-      markers="{{markers}}"
-      bindmarkertap="markertap"
-      style="width:100%; height:{{windowHeight}}px;"
-      longitude="113.324520"
-      latitude="23.099994" scale='16'>
-    </map>
-  </view>
+    <!--地理位置页面-->
+    <view class='navbarpage' hidden="{{currentTab !== 0}}">
+      <!-- tab_01 -->
+      <!--地图容器-->
+      <view class='mapset'>
+        <map id="myMap"
+          markers="{{markers}}"
+          bindmarkertap="markertap"
+          style="width:100%; min-height:{{windowHeight*0.8}}px;display:flex; flex-direction: column; flex:1;"
+          longitude="113.324520"
+          latitude="23.099994" scale='{{mapScale}}'
+          enable-zoom='true'
+          bindtap='mapShowInfoTap'
+          show-location>
 
-  <!--调试与控制页面-->
-  <view class='navbarpage' hidden="{{currentTab !== 1}}">
-    <!-- tab_02 -->
-    <view class='navbar'>
-      <view wx:for="{{navitopBarControl}}" data-idx="{{index}}" wx:key="unique" bindtap="navtopBarControlTap" class="navitop-itemControl {{currentTabControl==index ? 'active' : ''}}">{{item}}</view>
+          <cover-view class='cover-view-map'>
+            <cover-image class='cover-image-map' bindtap='mapResetTap' src='../../images/map_reset.png' style='margin-bottom:5px;'></cover-image>
+            <cover-image class='cover-image-map' bindtap='mapZoomOutTap' src='../../images/mapzoomout.png' style='border-bottom:1px #cdcdcd solid;align-content:'></cover-image>
+            <cover-image class='cover-image-map' bindtap='mapZoomInTap' src='../../images/mapzoomin.png'></cover-image>
+          </cover-view>
+
+        <cover-view class='deviceInfo' wx:if='{{deviceInfoIsShow}}' overflow-y: scroll>
+          <cover-view class='deviceName'>
+            <cover-view style='flex:1;'>AUV 设备名称{{deviceInfo.deviceInfoID}}</cover-view>
+            <cover-view>
+              <cover-view style='font-size:11pt;'>漏水报警</cover-view>
+              <cover-view style='background:'></cover-view>
+            </cover-view>
+          </cover-view>
+          <cover-view class='deviceData'>
+            <cover-view>平均/最大/最小速度</cover-view>
+          </cover-view>
+          <cover-view class='deviceData'>
+            <cover-view>平均/最大/最小水深</cover-view>
+          </cover-view>
+          <cover-view class='deviceData'>
+            <cover-view>平均/最高/最低温度</cover-view>
+          </cover-view>
+          <cover-view class='deviceSet'>
+            <cover-view class='deviceShowMore' bindtap='deviceInfoShowMoreTap'>
+              <cover-image class='deviceShowMoreImage' src='../../images/more.png'></cover-image>
+              <cover-view style='margin-left: 5px; text-align:center;'>更多信息</cover-view>
+            </cover-view>
+            <cover-view class='deviceSetButton' bindtap='deviceSetWorkTap'>
+              <cover-view style='color:#fff;'>下达任务</cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+      </map>
     </view>
   </view>
 
   <!--操作日志页面-->
-  <view class='navbarpage' hidden="{{currentTab !== 2}}">
+  <view class='navbarpage' hidden="{{currentTab !== 1}}">
     <!-- tab_03 -->
-    
+    历史操作日志
   </view>
-  
 </view>
 
-  <!-- 侧滑栏 -->
+<!-- 侧滑栏 -->
   <!-- 侧边栏显示 start -->
   <!-- <view wx:if="{{ui.offsetLeft > 0}}" style="slide" style="width:{{ui.menuWidth}}px;height:{{windowHeight}}px;" bindtap = "handletap" bindtouchstart = "handletouchtart" catchtouchmove="handletouchmove" bindtouchend="handletouchend"> -->
   <view wx:if="{{ui.offsetLeft > 0}}" style="slide" style="width:{{ui.menuWidth}}px;height:{{windowHeight}}px;">
@@ -45,6 +74,9 @@
       <view class='user-face-wrapper' style='height: {{windowHeight*0.2}}px'>
         <image mode="aspectFill" src="../../images/backGround.png" style="height: {{windowHeight*0.2}}px" class="loginbg"></image>
         <image class="user-face" catchtap='loginInTap' src="{{itemAvatar}}"></image>
+        <view class='user-info'>
+          <text>{{userNickName}}</text>
+        </view>
         <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
           获取用户信息
         </button> -->
@@ -57,4 +89,5 @@
     </view>
   </view>
   <!-- 侧边栏显示 end -->
+
 </view>

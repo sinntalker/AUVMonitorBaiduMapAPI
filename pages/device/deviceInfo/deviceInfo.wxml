@@ -1,0 +1,68 @@
+<!--pages/device/deviceInfo/deviceInfo.wxml-->
+<view class='deviceInfo'>
+  <view class='deviceName'>
+    <text style='flex:1;'>AUV 设备名称</text>
+    <view>
+      <text style='font-size:11pt;'>漏水报警</text>
+      <view style='background:'></view>
+    </view>
+  </view>
+  <view class='deviceData'>
+    <text>平均/最大/最小速度</text>
+  </view>
+  <view class='deviceData'>
+    <text>平均/最大/最小水深</text>
+  </view>
+  <view class='deviceData'>
+    
+  </view>
+  <view class='deviceData'>
+    <text>平均/最高/最低温度</text>
+  </view>
+  <view class='deviceSet'>
+    <view class='deviceShowMore'>
+      <image class='deviceShowMoreImage' src='../../../images/more.png'></image>
+      <text style='margin-left: 5px; text-align:center;'>更多信息</text>
+    </view>
+    <view class='deviceSetButton'>
+      <text style='color:#fff;'>下达任务</text>
+    </view>
+  </view>
+</view>
+<view class='deviceInfoMore'>
+  <view class='deviceInfoExport'>
+    <view style='flex:1;'></view>
+    <view class='deviceInfoExportView'>导出Excel</view>
+  </view>
+  <view style='height:3px; background: #dfdfdf; margin-top: 3px; margin-bottom:3px;'></view>
+  <view class='deviceInfoHistoryList'>
+    <view>任务耗时</view>
+  </view>
+  <view style='height:3px; background: #dfdfdf; margin-top: 3px; margin-bottom:3px;'></view>
+  <view class='deviceInfoHistoryList'>
+    <view>累计行程</view>
+  </view>
+  <view style='height:3px; background: #dfdfdf; margin-top: 3px; margin-bottom:3px;'></view>
+  <view class='deviceInfoHistoryList'>
+    <view>历史速度</view>
+    <!-- <view class='deviceInfoHistoryListData'>
+      历史数据
+    </view> -->
+    <canvas canvas-id="areaCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+  </view>
+  <view style='height:3px; background: #dfdfdf; margin-top: 3px; margin-bottom:3px;'></view>
+  <view class='deviceInfoHistoryList'>
+    <view>历史水深</view>
+    <canvas canvas-id="areaCanvas1" class="canvas" bindtouchstart="touchHandler"></canvas>
+  </view>
+  <view style='height:3px; background: #dfdfdf; margin-top: 3px; margin-bottom:3px;'></view>
+  <view class='deviceInfoHistoryList'>
+    <view>姿态角数据</view>
+    <canvas canvas-id="areaCanvas2" class="canvas" bindtouchstart="touchHandler"></canvas>
+  </view>
+  <view style='height:3px; background: #dfdfdf; margin-top: 3px; margin-bottom:3px;'></view>
+  <view class='deviceInfoHistoryList'>
+    <view>CTD（海水温度、盐度、深度）</view>
+    <canvas canvas-id="areaCanvas3" class="canvas" bindtouchstart="touchHandler"></canvas>
+  </view>
+</view>

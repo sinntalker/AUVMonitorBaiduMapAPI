@@ -1,0 +1,79 @@
+<!--pages/device/deviceWork/deviceWork.wxml-->
+<!--调试与控制页面-->
+<view class='navbarpage'>
+    <!-- tab_02 -->
+  <view class='navbar'>
+    <view wx:for="{{navitopBarControl}}" data-idx="{{index}}" wx:key="unique" bindtap="navtopBarControlTap" class="navitop-itemControl {{currentTabControl==index ? 'active' : ''}}">{{item}}</view>
+  </view>
+
+  <view hidden='{{currentTabControl !== 0}}'>
+    <view class='workDebug'>
+      <view class='workDebug-row'>
+        <text class='debug-row'>螺旋桨启停功能</text>
+        <text class='debug' bindtap='debugSpeedControlTap'>测试</text>
+      </view>
+      <view class='workDebug-col'>
+        <view class='workDebug-row' style='border: 0;'>
+          <text class='debug-row'>推进器摆角（α、β）</text>
+          <text class='debug-info'>α：垂直，β：水平</text>
+        </view>
+        <view class='workDebug-row'>
+          <text class='debug' bindtap='debugAngleATap'>摆角α测试</text>
+          <text class='debug' bindtap='debugAngleBTap'>摆角β测试</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view hidden='{{currentTabControl !== 1}}'>
+    <view class='workDebug'>
+      <view class='workDebug-col'>
+        <text>设置目标点</text>
+        <!-- 地图选点 -->
+        <view class='mapset'>
+          <map id="myMapWork"
+            markers="{{markers}}"
+            bindmarkertap="markertap"
+            style="width:100%; height:200px;"
+            longitude="113.324520"
+            latitude="23.099994"
+            enable-zoom='true'
+            scale='{{mapScale}}'
+            bindtap='mapSetTap'
+            show-location>
+          
+            <cover-view class='cover-view-map'>
+              <cover-image class='cover-image-map' bindtap='mapResetTap' src='../../../images/map_reset.png' style='margin-bottom:5px;'></cover-image>
+              <cover-image class='cover-image-map' bindtap='mapZoomOutTap' src='../../../images/mapzoomout.png' style='border-bottom:1px #cdcdcd solid;align-content:'></cover-image>
+              <cover-image class='cover-image-map' bindtap='mapZoomInTap' src='../../../images/mapzoomin.png'></cover-image>
+            </cover-view>
+          </map>
+        </view>
+        <view class='workDebug-col'>
+          当前目标地点：
+          <view class='workDebug-row'>
+            经度：{{latitude}}，纬度：{{longitude}}
+          </view>
+        </view>
+      </view>
+      <view class='workDebug-row'>
+        <text class='debug-row'>下潜深度</text>
+        <text class='datainfo' bindtap='inputDepthTap'>数据{{data}}</text>
+        <text class='hintinfo'>m</text>
+      </view>
+      <view class='workDebug-row'>
+        <text class='debug-row'>航速</text>
+        <text class='datainfo' bindtap='inputSpeedTap'>数据{{data}}</text>
+        <text class='hintinfo'>m/s</text>
+      </view>
+      <view class='submitRun'>
+        <view class='submitButton' bindtap='submitRunTap'>发送命令</view>
+        <view class='workDebug-row'>
+          <view class='debug-info'>发送状态：</view>
+          <view style='color: green; opacity:0.8;' wx:if='{{status}}'>success</view>
+          <view style='color: red;opacity:0.8;' wx:if='{{!status}}'>fail</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

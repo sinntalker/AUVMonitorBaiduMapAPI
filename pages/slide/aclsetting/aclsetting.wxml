@@ -1,2 +1,53 @@
 <!--pages/slide/aclsetting/aclsetting.wxml-->
-<text>pages/slide/aclsetting/aclsetting.wxml</text>
+<view>
+  <block wx:for="{{[1,2,3,4,5]}}" wx:key="unique">
+    <template is="userPermission" data='{{...items}}'/>
+  </block>
+</view>
+
+
+<template name="userPermission">
+  <view class='userPermission'>
+    <view style='border: 1px solid #118fff;border-radius: 10px;'>
+      <view class='userPermission-row'>
+        <view style='flex: 1; text-align:left;padding: 3px 0;'>序号：{{num}}</view>
+        <text class='userPermission-userData-text' style='background: #118fff; color: white; border-radius:10px;padding: 3px 8px;'>保存更改</text>
+      </view>
+      <view class='userPermission-row'>
+        <view class='userPermission-userData-data' style='text-align:left;'>
+          <text class='userPermission-userData-text'>用户昵称</text>
+        </view>
+        <view class='userPermission-userData-data'>
+          <text class='userPermission-userData-text'>用户ID</text>
+        </view>
+      </view>
+      <view class='userPermission-row'>
+        <text>管理员权限</text>
+        <view class='userPermission-set-data'>
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="picker">
+              当前选择：{{array[index]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='userPermission-row'>
+        <text style='text-align: center; margin-top:auto; margin-bottom:auto;'>绑定设备列表</text>
+        <view class='userPermission-row-image'>
+          <view style='flex:1;'></view>
+          <image class='userPermission-edit-image' src='../../../images/plus.png'></image>
+          <image class='userPermission-edit-image' src='../../../images/MINUS.png'></image>
+        </view>
+      </view>
+      <view class='userPermission-row'>
+        <view class='userPermission-row-data'>
+          <radio></radio>
+          <text  style='text-align: center; margin-top:auto; margin-bottom:auto;'>设备名称</text>
+          <view class='userPermission-set-data'>
+            <text>设备ID</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

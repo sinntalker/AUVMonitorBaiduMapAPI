@@ -8,7 +8,9 @@
     "pages/slide/projectbrief/projectbrief",
     "pages/slide/feedback/feedback",
     "pages/slide/aboutus/aboutus",
-    "pages/slide/aclsetting/aclsetting"
+    "pages/slide/aclsetting/aclsetting",
+    "pages/device/deviceInfo/deviceInfo",
+    "pages/device/deviceWork/deviceWork"
   ],
   "permission": {
     "scope.userLocation": {

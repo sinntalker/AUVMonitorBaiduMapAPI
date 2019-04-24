@@ -67,7 +67,7 @@ App({
           if (res.authSetting['scope.userInfo']) {// 已经授权，可以直接调用 getUserInfo 获取头像昵称
             console.log("APP - 已经授权，可以直接调用 getUserInfo 获取头像昵称 --> 直接跳转到index页面")
             wx.redirectTo({
-              url: '/pages/index/index',
+              url: '../../pages/index/index',
             })
           } else if (!res.authSetting['scope.userInfo']) { // 未授权，不能调用 getUserInfo 获取头像昵称
             console.log("APP - 未授权，不能调用 getUserInfo 获取头像昵称 --> 跳转到start页面获取授权") //后续不用采取任何动作

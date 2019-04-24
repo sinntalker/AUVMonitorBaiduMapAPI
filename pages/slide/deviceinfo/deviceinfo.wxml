@@ -1,2 +1,32 @@
 <!--pages/slide/deviceinfo/deviceinfo.wxml-->
-<text>pages/slide/deviceinfo/deviceinfo.wxml</text>
+<!-- <text>pages/slide/deviceinfo/deviceinfo.wxml</text> -->
+<view>
+  <block wx:for="{{[1,2,3,4,5]}}" wx:key="unique">
+    <template is="deviceList" data='{{...items}}'/>
+  </block>
+</view>
+
+<template name="deviceList">
+  <view class='deviceList'>
+    <view class='deviceInfoRow'>
+      <text>设备名称</text>
+      <view class='deviceInfoRow-data'>
+        <text>设备名称</text>
+      </view>
+    </view>
+    <view class='deviceInfoRow'>
+      <text>设备ID</text>
+      <view class='deviceInfoRow-data'>
+        <text>设备ID</text>
+      </view>
+    </view>
+    <view class='deviceInfoRow' style='padding: 10px 0 10px 0;border-bottom:0px;'>
+      <view class='deviceInfoRow-data' style='text-align:left;'>
+        <text class='deviceInfoRow-text'>更多信息</text>
+      </view>
+      <view class='deviceInfoRow-data'>
+        <text class='deviceInfoRow-text'>下达任务</text>
+      </view>
+    </view>
+  </view>
+</template>

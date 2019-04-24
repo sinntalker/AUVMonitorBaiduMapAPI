@@ -1,0 +1,32 @@
+<template name='deviceInfo'>
+  <cover-view class='deviceInfo'>
+    <cover-view class='deviceName'>
+      <cover-view style='flex:1;'>AUV 设备名称{{data}}</cover-view>
+      <cover-view>
+        <cover-view style='font-size:11pt;'>漏水报警</cover-view>
+        <cover-view style='background:'></cover-view>
+      </cover-view>
+    </cover-view>
+    <cover-view class='deviceData'>
+      <cover-view>平均/最大/最小速度</cover-view>
+    </cover-view>
+    <cover-view class='deviceData'>
+      <cover-view>平均/最大/最小水深</cover-view>
+    </cover-view>
+    <cover-view class='deviceData'>
+      
+    </cover-view>
+    <cover-view class='deviceData'>
+      <cover-view>平均/最高/最低温度</cover-view>
+    </cover-view>
+    <cover-view class='deviceSet'>
+      <cover-view class='deviceShowMore' bindtap='deviceInfoShowMoreTap'>
+        <cover-image class='deviceShowMoreImage' src='../../images/more.png'></cover-image>
+        <cover-view style='margin-left: 5px; text-align:center;'>更多信息</cover-view>
+      </cover-view>
+      <cover-view class='deviceSetButton' bindtap='deviceSetWorkTap'>
+        <cover-view style='color:#fff;'>下达任务</cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</template>

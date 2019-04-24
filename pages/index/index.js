@@ -4,6 +4,10 @@ var app = getApp()
 
 const AV = require('../../libs/av-weapp-min.js'); //存储服务
 
+//画图
+var wxCharts = require('../../libs/wxcharts.js');
+var areaChart = null;
+
 // 定义常量
 const MENU_WIDTH_SCALE = 0.5;
 const FAST_SPEED_SECOND = 300;
@@ -24,9 +28,8 @@ Page({
     userAvatarUrl: '',
     userNickName: '',
 
-
     // index 首页顶部导航 - "地理位置", "调试与控制", "操作日志"
-    navitopbar: ["地理位置", "调试与控制", "操作日志"],
+    navitopbar: ["地理位置", "操作日志"],
     currentTab: 0, //标签控制： 0 - 地理位置， 1 - 调试与控制， 2 - 操作日志
 
     //地图上marker点
@@ -37,7 +40,37 @@ Page({
       longitude: 113.324520,
       width: 50,
       height: 50
+    },
+    {
+      iconPath: '../../images/auv.png',
+      id: 1,
+      latitude: 23.1011750000,
+      longitude: 113.3235540000,
+      width: 50,
+      height: 50
     }],
+
+    
+    deviceInfoIsShow: false, //是否展示AUV信息
+    // deviceInfoID: 0, //AUV 对应的ID编号
+
+    deviceInfo: {
+      deviceInfoID: 0, //AUV 对应的ID编号
+
+      min_speed: 0, //最小速度
+      max_speed: 0, //最大速度
+      ave_speed: 0, //平均速度
+
+      min_depth: 0, //最小水深
+      max_depth: 0, //最大水深
+      ave_depth: 0, //平均水深
+
+      min_temperature: 0, //最小水温
+      max_temperature: 0, //最大水温
+      ave_temperature: 0, //平均水温
+
+      deviceInfoMoreIsShow: false, //是否展示更多信息
+    },
 
     // index 系统信息
     windowHeight: 0,
@@ -45,9 +78,7 @@ Page({
     systemHeight: app.globalData.systemInfo.windowHeight, //系统高度
     systemWidth: app.globalData.systemInfo.windowWidth, //系统宽度
 
-    // index 首页顶部导航 - “调试与控制” 页面 导航
-    navitopBarControl: ['调试功能', '控制功能',],
-    currentTabControl: 0, //标签控制： 0 - 调试功能 ， 1 - 控制功能
+    
 
     // 侧滑栏 - 菜单宽度、偏移位置、是否开始
     ui: {
@@ -83,6 +114,9 @@ Page({
       },
     ],
     itemAvatar: '',
+
+    mapContext: '',
+    mapScale: 16,
   },
 
   // 顶部导航栏 切换
@@ -94,14 +128,114 @@ Page({
 
   //地图 - 标记点
   markertap(e) {
-    console.log(e.markerId)
+    // console.log(e.markerId + "deviceInfoIsShow: " + this.data.deviceInfoIsShow)
+    var deviceInfoId = 'deviceInfo.deviceInfoID';
+    if (this.data.deviceInfo.deviceInfoID == e.markerId) {
+      if (this.data.deviceInfoIsShow) {
+        this.setData({
+          deviceInfoIsShow: false,
+          [deviceInfoId]: e.markerId
+        })
+      } else {
+        this.setData({
+          deviceInfoIsShow: true,
+          [deviceInfoId]: e.markerId
+          // deviceInfoID: e.markerId,
+        })
+      }
+    } else {
+      if (this.data.deviceInfoIsShow) {
+        this.setData({
+          deviceInfoIsShow: true,
+          [deviceInfoId]: e.markerId
+          // deviceInfoID: e.markerId
+        })
+      } else {
+        this.setData({
+          deviceInfoIsShow: true,
+          [deviceInfoId]: e.markerId
+          // deviceInfoID: e.markerId
+        })
+      }
+    }
+    
   },
 
-  // 顶部导航栏 - 调试与控制 切换
-  navtopBarControlTap: function(e) {
-    this.setData({
-      currentTabControl: e.currentTarget.dataset.idx // 标签切换
+  mapResetTap: function (e) {
+    console.log("mapResetTap: " + e)
+    var that = this;
+    // this.mapCtx.moveToLocation();
+    this.data.mapContext.moveToLocation();
+  },
+
+  mapZoomOutTap: function (e) {
+    console.log("mapZoomOutTap: " + e)
+    if (this.data.mapScale <= 18) {
+      this.setData({
+        mapScale: ++this.data.mapScale
+      })
+    }
+  },
+
+  mapZoomInTap: function (e) {
+    console.log("mapZoomInTap: " + e)
+    if (this.data.mapScale >= 5) {
+      this.setData({
+        mapScale: --this.data.mapScale
+      })
+    }
+  },
+
+  deviceInfoShowMoreTap: function(e) {
+    console.log("deviceInfoShowMoreTap")
+
+    var deviceInfoMoreIsShow = 'deviceInfo.deviceInfoMoreIsShow';
+    wx.navigateTo({
+      url: '../../pages/device/deviceInfo/deviceInfo?id=' + this.data.deviceInfo.deviceInfoID,
     })
+    // if (this.data.deviceInfo.deviceInfoMoreIsShow == true) {
+    //   this.setData({
+    //     [deviceInfoMoreIsShow]: false,
+    //   })
+    // } else {
+    //   this.setData({
+    //     [deviceInfoMoreIsShow]: true,
+    //   })
+    // }
+
+  },
+
+  deviceSetWorkTap: function(e) {
+    console.log("deviceSetWorkTap")
+
+    wx.navigateTo({
+      url: '../../pages/device/deviceWork/deviceWork?id=' + this.data.deviceInfo.deviceInfoID,
+    })
+  },
+
+  mapShowInfoTap: function(e) {
+    console.log("mapShowInfoTap")
+
+    var deviceInfoMoreIsShow = 'deviceInfo.deviceInfoMoreIsShow';
+
+    this.setData({
+      deviceInfoIsShow: false,
+      [deviceInfoMoreIsShow]: false,
+      // deviceInfoID: e.markerId
+    })
+    wx.getLocation({
+      type: 'wgs84',
+      success(res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        var speed = res.speed
+        var accuracy = res.accuracy
+        console.log("当前经纬度为： " + latitude + ',' + longitude + ".")
+      }
+    })
+    
+    
+    
   },
 
   // index 加载页面
@@ -180,6 +314,13 @@ Page({
       console.log("index - onload - getSystemInfo error:" + e);
     }
 
+    this.mapCtx = wx.createMapContext('myMap')
+
+    this.data.mapContext = this.mapCtx;
+    this.setData({
+      mapContext: this.mapCtx
+    })
+
   },
 
   // index 展示页面
@@ -224,6 +365,14 @@ Page({
     } else if (ui.offsetLeft >= ui.menuWidth) {
       ui.offsetLeft = 0;
     }
+    this.setData({
+      ui: ui,
+    })
+  },
+
+  userSlideCloseTap: function(e) {
+    let {ui} = this.data;
+    ui.offsetLeft = 0;
     this.setData({
       ui: ui,
     })
